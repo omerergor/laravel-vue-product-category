@@ -20,6 +20,11 @@ php artisan db:seed --class=ProductSeeder
 <b>Category Data</b><br>
 php artisan db:seed --class=CategorySeeder
 
+## Postman Files
+<b>In the Postman Folder</b><br>
+Categories.postman_collection.json<br>
+Products.postman_collection.json
+
 ## Category Api Example Routes
 
 <b>Get - List</b><br>
