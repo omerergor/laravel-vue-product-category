@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CategoryController extends Controller
@@ -78,6 +80,14 @@ class CategoryController extends Controller
 
         $category->fill($request->all());
         $category->save();
+
+        $productCategoryColumn = [
+            "id"    => $id,
+            "name"  => $category->name,
+            "photo" => $category->photo
+        ];
+        Product::WhereJsonContains('category->id', intval($id))->update([ 'category' => $productCategoryColumn ]);
+
         return response()->json($category, JsonResponse::HTTP_ALREADY_REPORTED);
     }
 
